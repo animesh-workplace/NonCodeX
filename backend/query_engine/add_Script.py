@@ -66,3 +66,15 @@ with WorkerPool(n_jobs=70) as pool:
     results = pool.map(bulk_insert, chunks, progress_bar=True)
 
 repeat_again = [x for x in tqdm(results) if x is not True]
+
+
+combine = [
+    tf_chipseq[["Chr", "Start", "End", "Type"]],
+    super_enhancer[["Chr", "Start", "End", "Type"]],
+    chromatin_state[["Chr", "Start", "End", "Type"]],
+    promoter_tss[["Chr", "Start", "End", "Type"]],
+    promoter_chromHMM[["Chr", "Start", "End", "Type"]],
+    enhancer_pro[["Chr", "Start", "End", "Type"]],
+    enhancer_gro[["Chr", "Start", "End", "Type"]],
+    enhancer_fantom[["Chr", "Start", "End", "Type"]],
+]
