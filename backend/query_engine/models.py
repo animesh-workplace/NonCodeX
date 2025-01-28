@@ -39,5 +39,32 @@ class VaraDB_TFChipSeq(models.Model):
         verbose_name = "TF ChIP-seq Data"
         verbose_name_plural = "TF ChIP-seq Data"
 
-    def __str__(self):
-        return f"TF: {self.tf}, Source: {self.source}, Biosample: {self.biosample_name}"
+
+class VaraDB_Promoter_ChromHMM(models.Model):
+    chromosome_region = models.ForeignKey(
+        "ChromosomeRegion",
+        on_delete=models.CASCADE,
+        related_name="varadb_promoter_chrohmm",
+    )
+    from_state = models.CharField(max_length=100)
+    epigenome_id = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = "Promoter ChromHMM"
+        verbose_name_plural = "Promoter ChromHMM"
+
+
+class VaraDB_Promoter_TSS(models.Model):
+    chromosome_region = models.ForeignKey(
+        "ChromosomeRegion",
+        on_delete=models.CASCADE,
+        related_name="varadb_promoter_tss",
+    )
+    strand = models.CharField(max_length=100)
+    gene_name = models.CharField(max_length=100)
+    gene_id = models.CharField(max_length=100)
+    gene_type = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = "Promoter Transcription Start Site (TSS)"
+        verbose_name_plural = "Promoter Transcription Start Site (TSS)"
