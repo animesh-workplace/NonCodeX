@@ -38,8 +38,4 @@ for i in range(0, len(df), chunk_size):
     chunks.append([[i, min(i + chunk_size, len(df))]])
 
 with WorkerPool(n_jobs=40) as pool:
-    results = pool.map(
-        bulk_insert,
-        chunks,
-        progress_bar=True,
-    )
+    results = pool.map(bulk_insert, chunks, progress_bar=True)
