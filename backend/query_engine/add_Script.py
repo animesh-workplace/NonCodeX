@@ -1,4 +1,5 @@
 import random
+from tqdm import tqdm
 from time import sleep
 from mpire import WorkerPool
 import fireducks.pandas as pandas
@@ -36,10 +37,10 @@ def bulk_insert(chunk):
                 tf_chipseq = VaraDB_TFChipSeq(
                     tf=row["TF"],
                     source=row["Source"],
-                    tf_class=row["TF_Class"],
+                    tf_class=row["TFclass"],
                     chromosome_region=chr_region,
-                    biosample_type=row["Biosample_Type"],
-                    biosample_name=row["Biosample_Name"],
+                    biosample_type=row["Biosample_type"],
+                    biosample_name=row["Biosample_name"],
                 )
                 tf_chipseq_objects.append(tf_chipseq)
 
@@ -56,7 +57,7 @@ def bulk_insert(chunk):
 
 chunks = []
 chunk_size = 10000
-for i in range(0, len(df), chunk_size):
+for i in tqdm(range(0, len(df), chunk_size)):
     chunks.append([[i, min(i + chunk_size, len(df))]])
 
 with WorkerPool(n_jobs=50) as pool:
