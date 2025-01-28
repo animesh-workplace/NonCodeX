@@ -5,6 +5,8 @@ from django.db import models
 class ChromosomeRegion(models.Model):
     TYPE_CHOICES = [
         ("VaraDB_TFChipSEQ", "VaraDB_TFChipSEQ"),
+        ("VaraDB_Promoter_ChromHMM", "VaraDB_Promoter_ChromHMM"),
+        ("VaraDB_Promoter_TSS", "VaraDB_Promoter_TSS"),
     ]
 
     chr = models.CharField(max_length=50, verbose_name="Chromosome")
