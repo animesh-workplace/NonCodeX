@@ -31,9 +31,9 @@ class ChromosomeRegionUploadView(APIView):
         results = []
 
         for _, row in df.iterrows():
+            end_pos = row["end"]
             chr_name = row["chr"]
             start_pos = row["start"]
-            end_pos = row["end"]
 
             # Find overlapping regions
             matching_regions = ChromosomeRegion.objects.filter(
