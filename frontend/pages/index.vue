@@ -3,7 +3,7 @@
 		<div class="flex items-center justify-center w-full">
 			<label
 				for="dropzone-file"
-				class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-200 hover:bg-gray-300"
+				class="flex flex-col items-center justify-center w-full h-36 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-200 hover:bg-gray-300"
 				@dragover.prevent
 				@drop.prevent="handleDrop"
 			>
@@ -31,12 +31,39 @@
 				<input id="dropzone-file" type="file" class="hidden" accept=".tsv" @change="handleFileSelect" />
 			</label>
 		</div>
+
+		<div class="flex justify-center align-center my-5" v-if="isUploading">
+			<ProgressSpinner class="!w-10 !h-10" strokeWidth="8" fill="transparent" animationDuration="2s" />
+		</div>
+
+		<div class="my-12 drop-shadow" v-if="isUploading == false && result.length">
+			<DataTable
+				lazy
+				paginator
+				:rows="20"
+				dataKey="id"
+				stripedRows
+				:value="result"
+				@rowExpand="onRowExpand"
+				:rowsPerPageOptions="[20, 50, 100, 200, -1]"
+			>
+				<Column expander style="width: 5rem" />
+				<Column field="chr" header="Chromosome" style="width: 25%"></Column>
+				<Column field="start" header="Start" style="width: 25%"></Column>
+				<Column field="end" header="End" style="width: 25%"></Column>
+				<Column field="type" header="Type" style="width: 25%"></Column>
+
+				<template #expansion="slotProps"> Hellowoelr </template>
+			</DataTable>
+		</div>
 	</div>
 </template>
 
 <script setup>
 import { useQuery } from '@/api/search'
-const errorMessage = ref('')
+const result = ref([])
+const isUploading = ref(false)
+const expandedRowsx = ref({})
 
 const uploadFile = async (file) => {
 	// Validate file type
@@ -49,11 +76,13 @@ const uploadFile = async (file) => {
 
 	const { uploadQuery } = useQuery()
 	try {
-		await uploadQuery(formData)
+		isUploading.value = true
+		result.value = await uploadQuery(formData)
 		push.success({
 			title: 'Successfully Uploaded',
 			message: 'Starting Analysis',
 		})
+		isUploading.value = false
 	} catch (err) {
 		console.log(err)
 	}
@@ -63,15 +92,9 @@ const handleFileSelect = async (event) => {
 	const file = event.target.files[0]
 	if (file) {
 		try {
-			errorMessage.value = ''
-			const result = await uploadFile(file)
-			console.log('Upload successful:', result)
-			// You can emit an event here to notify parent component
-			// emit('upload-success', result)
+			await uploadFile(file)
 		} catch (error) {
-			errorMessage.value = error.message
 			console.error('Upload failed:', error)
-			// emit('upload-error', error)
 		}
 	}
 }
@@ -80,16 +103,15 @@ const handleDrop = async (event) => {
 	const file = event.dataTransfer.files[0]
 	if (file) {
 		try {
-			errorMessage.value = ''
-			const result = await uploadFile(file)
-			console.log('Upload successful:', result)
-			// emit('upload-success', result)
+			await uploadFile(file)
 		} catch (error) {
-			errorMessage.value = error.message
 			console.error('Upload failed:', error)
-			// emit('upload-error', error)
 		}
 	}
+}
+
+const onRowExpand = (data, index) => {
+	console.log(data, index)
 }
 </script>
 
