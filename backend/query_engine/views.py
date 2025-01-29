@@ -45,4 +45,4 @@ class ChromosomeRegionUploadView(APIView):
             ).data
             results.extend(serialized_data)
 
-        return Response({"matches": results}, status=status.HTTP_200_OK)
+        return Response(results, status=status.HTTP_200_OK)
