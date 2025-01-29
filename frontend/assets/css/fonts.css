@@ -1,0 +1,211 @@
+@charset "utf-8";
+@font-face {
+	font-weight: 300;
+	font-style: normal;
+	font-family: Averta;
+	src: url(../fonts/Averta-Light.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 300;
+	font-style: italic;
+	font-family: Averta;
+	src: url(../fonts/Averta-LightItalic.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 400;
+	font-style: normal;
+	font-family: Averta;
+	src: url(../fonts/Averta-Regular.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 400;
+	font-style: italic;
+	font-family: Averta;
+	src: url(../fonts/Averta-RegularItalic.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 500;
+	font-style: normal;
+	font-family: Averta;
+	src: url(../fonts/Averta-Semibold.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 500;
+	font-style: italic;
+	font-family: Averta;
+	src: url(../fonts/Averta-SemiboldItalic.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 700;
+	font-style: normal;
+	font-family: Averta;
+	src: url(../fonts/Averta-Bold.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 700;
+	font-style: italic;
+	font-family: Averta;
+	src: url(../fonts/Averta-BoldItalic.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 800;
+	font-style: normal;
+	font-family: Averta;
+	src: url(../fonts/Averta-Extrabold.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 800;
+	font-style: italic;
+	font-family: Averta;
+	src: url(../fonts/Averta-ExtraboldItalic.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 900;
+	font-style: normal;
+	font-family: Averta;
+	src: url(../fonts/Averta-Black.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 900;
+	font-style: italic;
+	font-family: Averta;
+	src: url(../fonts/Averta-BlackItalic.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 300;
+	font-style: normal;
+	font-family: Plush;
+	src:
+		url(../fonts/Plush-ExtraLight.woff2) format('woff2'),
+		url(../fonts/Plush-ExtraLight.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 300;
+	font-style: italic;
+	font-family: Plush;
+	src:
+		url(../fonts/Plush-ExtraLightItalic.woff2) format('woff2'),
+		url(../fonts/Plush-ExtraLightItalic.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 400;
+	font-style: normal;
+	font-family: Plush;
+	src:
+		url(../fonts/Plush-Regular.woff2) format('woff2'),
+		url(../fonts/Plush-Regular.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 400;
+	font-style: italic;
+	font-family: Plush;
+	src:
+		url(../fonts/Plush-Italic.woff2) format('woff2'),
+		url(../fonts/Plush-Italic.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 500;
+	font-style: normal;
+	font-family: Plush;
+	src:
+		url(../fonts/Plush-Medium.woff2) format('woff2'),
+		url(../fonts/Plush-Medium.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 500;
+	font-style: italic;
+	font-family: Plush;
+	src:
+		url(../fonts/Plush-MediumItalic.woff2) format('woff2'),
+		url(../fonts/Plush-MediumItalic.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 600;
+	font-style: normal;
+	font-family: Plush;
+	src:
+		url(../fonts/Plush-Bold.woff2) format('woff2'),
+		url(../fonts/Plush-Bold.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 600;
+	font-style: italic;
+	font-family: Plush;
+	src:
+		url(../fonts/Plush-BoldItalic.woff2) format('woff2'),
+		url(../fonts/Plush-BoldItalic.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 800;
+	font-style: normal;
+	font-family: Plush;
+	src:
+		url(../fonts/Plush-ExtraBold.woff2) format('woff2'),
+		url(../fonts/Plush-ExtraBold.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 800;
+	font-style: italic;
+	font-family: Plush;
+	src:
+		url(../fonts/Plush-ExtraBoldItalic.woff2) format('woff2'),
+		url(../fonts/Plush-ExtraBoldItalic.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 900;
+	font-style: normal;
+	font-family: Plush;
+	src:
+		url(../fonts/Plush-Black.woff2) format('woff2'),
+		url(../fonts/Plush-Black.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 900;
+	font-style: italic;
+	font-family: Plush;
+	src:
+		url(../fonts/Plush-BlackItalic.woff2) format('woff2'),
+		url(../fonts/Plush-BlackItalic.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 400;
+	font-style: normal;
+	font-family: Caveat;
+	src:
+		url(../fonts/Caveat-Regular.woff2) format('woff2'),
+		url(../fonts/Caveat-Regular.woff) format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 600;
+	font-style: normal;
+	font-family: Caveat;
+	src:
+		url(../fonts/Caveat-Bold.woff2) format('woff2'),
+		url(../fonts/Caveat-Bold.woff) format('woff');
+	font-display: swap;
+}
