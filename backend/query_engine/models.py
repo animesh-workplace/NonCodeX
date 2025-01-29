@@ -75,3 +75,28 @@ class VaraDB_Promoter_TSS(models.Model):
     class Meta:
         verbose_name = "Promoter Transcription Start Site (TSS)"
         verbose_name_plural = "Promoter Transcription Start Site (TSS)"
+
+
+class VaraDB_SuperEnhancer(models.Model):
+    chromosome_region = models.ForeignKey(
+        "ChromosomeRegion",
+        on_delete=models.CASCADE,
+        related_name="varadb_superenhancer",
+    )
+    rank = models.IntegerField()
+    element = models.IntegerField()
+    common_snp = models.IntegerField()
+    eqtl = models.IntegerField()
+    risk_snp = models.IntegerField()
+    tfbs = models.IntegerField()
+    crisps_cas9_target_sites = models.IntegerField()
+    case_value = models.FloatField()
+    control_value = models.FloatField()
+    overlap_gene = models.TextField()
+    proximal_gene = models.TextField()
+    closest_gene = models.TextField()
+    closest_active_gene = models.TextField()
+    data_sources = models.TextField()
+    biosample_type = models.CharField(max_length=255)
+    tissue_type = models.CharField(max_length=255)
+    biosample_name = models.CharField(max_length=255)
