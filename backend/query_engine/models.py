@@ -100,3 +100,73 @@ class VaraDB_SuperEnhancer(models.Model):
     biosample_type = models.CharField(max_length=255)
     tissue_type = models.CharField(max_length=255)
     biosample_name = models.CharField(max_length=255)
+
+    class Meta:
+        verbose_name = "SuperEnhancer"
+        verbose_name_plural = "SuperEnhancer"
+
+
+class VaraDB_ChromatinState(models.Model):
+    chromosome_region = models.ForeignKey(
+        "ChromosomeRegion",
+        on_delete=models.CASCADE,
+        related_name="varadb_chromatin_state",
+    )
+    from_state = models.CharField(max_length=100)
+    epigenome_id = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = "Chromatin State"
+        verbose_name_plural = "Chromatin State"
+
+
+class VaraDB_Enhancer_GROSeq(models.Model):
+    chromosome_region = models.ForeignKey(
+        "ChromosomeRegion",
+        on_delete=models.CASCADE,
+        related_name="varadb_enhancer_groseq",
+    )
+    associated_gene_4dgenome = models.TextField(
+        verbose_name="Associated Gene - 4D Genome"
+    )
+    detection_method = models.CharField(max_length=255, verbose_name="Detection Method")
+    closest_gene = models.CharField(max_length=255, verbose_name="Closest Gene")
+    cell_tissue = models.CharField(max_length=255, verbose_name="Cell/Tissue")
+    series = models.CharField(max_length=255, verbose_name="Series")
+
+    class Meta:
+        verbose_name = "HACEER Active Enhancer GROSeq"
+        verbose_name_plural = "HACEER Active Enhancer GROSeq"
+
+
+class VaraDB_Enhancer_PROSeq(models.Model):
+    chromosome_region = models.ForeignKey(
+        "ChromosomeRegion",
+        on_delete=models.CASCADE,
+        related_name="varadb_enhancer_proseq",
+    )
+    associated_gene_4dgenome = models.TextField(
+        verbose_name="Associated Gene - 4D Genome"
+    )
+    detection_method = models.CharField(max_length=255, verbose_name="Detection Method")
+    closest_gene = models.CharField(max_length=255, verbose_name="Closest Gene")
+    cell_tissue = models.CharField(max_length=255, verbose_name="Cell/Tissue")
+    series = models.CharField(max_length=255, verbose_name="Series")
+
+    class Meta:
+        verbose_name = "HACEER Active Enhancer PROSeq"
+        verbose_name_plural = "HACEER Active Enhancer PROSeq"
+
+
+class VaraDB_Enhancer_FANTOM5(models.Model):
+    chromosome_region = models.ForeignKey(
+        "ChromosomeRegion",
+        on_delete=models.CASCADE,
+        related_name="varadb_enhancer_fantom5",
+    )
+    sample_id = models.CharField(max_length=100)
+    description = models.TextField(max_length=100)
+
+    class Meta:
+        verbose_name = "Active Enhancer FANTOM5"
+        verbose_name_plural = "Active Enhancer FANTOM5"
