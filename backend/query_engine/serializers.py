@@ -2,13 +2,13 @@ from rest_framework import serializers
 from .models import (
     ChromosomeRegion,
     VaraDB_TFChipSeq,
-    VaraDB_Promoter_ChromHMM,
     VaraDB_Promoter_TSS,
     VaraDB_SuperEnhancer,
     VaraDB_ChromatinState,
     VaraDB_Enhancer_GROSeq,
     VaraDB_Enhancer_PROSeq,
     VaraDB_Enhancer_FANTOM5,
+    VaraDB_Promoter_ChromHMM,
 )
 
 
