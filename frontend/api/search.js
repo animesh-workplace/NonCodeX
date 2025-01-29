@@ -4,13 +4,9 @@ export function useQuery() {
 
 	const uploadQuery = async (formData) => {
 		try {
-			// const csrfToken = useCookie('csrftoken')
-			console.log(BASEURL)
-
 			const { data, error } = await useFetch(`${BASEURL}/query/data/`, {
 				method: 'POST',
 				body: formData,
-				// headers: { 'X-CSRFToken': csrfToken.value },
 			})
 
 			if (error.value) {
