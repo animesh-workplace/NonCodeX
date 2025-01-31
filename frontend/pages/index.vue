@@ -37,6 +37,10 @@
 		</div>
 
 		<div class="my-12 drop-shadow" v-if="isUploading == false && result.length">
+			<div class="flex justify-end">
+				<Button label="Download" severity="info" rounded class="mb-8 !px-8" @click="DownloadTable" />
+			</div>
+
 			<DataTable
 				lazy
 				paginator
@@ -44,26 +48,24 @@
 				dataKey="id"
 				stripedRows
 				:value="result"
-				@rowExpand="onRowExpand"
 				:rowsPerPageOptions="[20, 50, 100, 200, -1]"
 			>
-				<Column expander style="width: 5rem" />
 				<Column field="chr" header="Chromosome" style="width: 25%"></Column>
 				<Column field="start" header="Start" style="width: 25%"></Column>
 				<Column field="end" header="End" style="width: 25%"></Column>
 				<Column field="type" header="Type" style="width: 25%"></Column>
-
-				<template #expansion="slotProps"> Hellowoelr </template>
 			</DataTable>
 		</div>
 	</div>
 </template>
 
 <script setup>
+import { json2csv } from 'json-2-csv'
 import { useQuery } from '@/api/search'
+
 const result = ref([])
+const dayjs = useDayjs()
 const isUploading = ref(false)
-const expandedRowsx = ref({})
 
 const uploadFile = async (file) => {
 	// Validate file type
@@ -78,13 +80,11 @@ const uploadFile = async (file) => {
 	try {
 		isUploading.value = true
 		result.value = await uploadQuery(formData)
-		push.success({
-			title: 'Successfully Uploaded',
-			message: 'Starting Analysis',
-		})
+		push.success({ title: 'Successfully fetched query' })
 		isUploading.value = false
 	} catch (err) {
 		console.log(err)
+		push.error({ title: 'Some error occured' })
 	}
 }
 
@@ -110,8 +110,20 @@ const handleDrop = async (event) => {
 	}
 }
 
-const onRowExpand = (data, index) => {
-	console.log(data, index)
+const download_blob = (blob, filename) => {
+	const link = document.createElement('a')
+	link.href = URL.createObjectURL(blob)
+	link.download = filename
+	document.body.appendChild(link)
+	link.click()
+	document.body.removeChild(link)
+}
+
+const DownloadTable = () => {
+	const TableBlob = new Blob([json2csv(result.value, { emptyFieldValue: '', delimiter: { field: '\t' } })], {
+		type: 'text/tab-separated-values',
+	})
+	download_blob(TableBlob, `noncodex_download_table_${dayjs().format('DD_MM_YYYY_hh_mm_a')}.tsv`)
 }
 </script>
 
