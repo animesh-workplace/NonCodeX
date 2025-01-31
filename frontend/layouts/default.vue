@@ -1,6 +1,6 @@
 <template>
 	<div class="overflow-x-clip">
-		<div class="pt-16 bg-gray-100 h-screen w-screen">
+		<div class="py-16 bg-gray-100 h-screen w-screen">
 			<slot />
 		</div>
 	</div>
