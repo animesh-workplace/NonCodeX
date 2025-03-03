@@ -10,9 +10,12 @@ class ChromosomeRegion(models.Model):
         ("VaraDB_ChromatinState", "VaraDB_ChromatinState"),
         ("VaraDB_Enhancer_GROSeq", "VaraDB_Enhancer_GROSeq"),
         ("VaraDB_Enhancer_PROSeq", "VaraDB_Enhancer_PROSeq"),
-        ("VaraDB_Enhancer_FANTOM5", "VaraDB_Enhancer_FANTOM5"),
-        ("VaraDB_Promoter_ChromHMM", "VaraDB_Promoter_ChromHMM"),
         ("VaraDB_Disease_Enhancer", "VaraDB_Disease_Enhancer"),
+        ("VaraDB_Enhancer_FANTOM5", "VaraDB_Enhancer_FANTOM5"),
+        ("VaraDB_Typical_Enhancer", "VaraDB_Typical_Enhancer"),
+        ("VaraDB_Promoter_ChromHMM", "VaraDB_Promoter_ChromHMM"),
+        ("VaraDB_Validated_Enhancer_ENDB", "VaraDB_Validated_Enhancer_ENDB"),
+        ("VaraDB_Validated_Enhancer_VISTA", "VaraDB_Validated_Enhancer_VISTA"),
         ("VaraDB_EnDisease_Disease_Enhancer", "VaraDB_EnDisease_Disease_Enhancer"),
     ]
 
@@ -167,7 +170,7 @@ class VaraDB_Enhancer_FANTOM5(models.Model):
         related_name="varadb_enhancer_fantom5",
     )
     sample_id = models.CharField(max_length=100)
-    description = models.TextField(max_length=100)
+    description = models.TextField()
 
     class Meta:
         verbose_name = "Active Enhancer FANTOM5"
@@ -181,7 +184,7 @@ class VaraDB_Disease_Enhancer(models.Model):
         related_name="varadb_disease_enhancer",
     )
     target_gene = models.CharField(max_length=100)
-    disease_type = models.TextField(max_length=100)
+    disease_type = models.TextField()
 
     class Meta:
         verbose_name = "Disease Enhancer"
@@ -195,9 +198,60 @@ class VaraDB_EnDisease_Disease_Enhancer(models.Model):
         related_name="varadb_endisease_disease_enhancer",
     )
     target_gene = models.CharField(max_length=100)
-    disease_type = models.TextField(max_length=100)
+    disease_type = models.TextField()
     pubmed = models.CharField(max_length=100)
 
     class Meta:
         verbose_name = "EnDisease Disease Enhancer"
         verbose_name_plural = "EnDisease Disease Enhancer"
+
+
+class VaraDB_Typical_Enhancer(models.Model):
+    chromosome_region = models.ForeignKey(
+        "ChromosomeRegion",
+        on_delete=models.CASCADE,
+        related_name="varadb_typical_enhancer",
+    )
+    data_sources = models.CharField(max_length=100)
+    biosample_type = models.TextField()
+    tissue_type = models.CharField(max_length=100)
+    biosample_name = models.CharField(max_length=100)
+    rank = models.IntegerField()
+    num_constituents = models.IntegerField()
+    size_constituents = models.IntegerField()
+    case_value = models.FloatField()
+    control_value = models.FloatField()
+
+    class Meta:
+        verbose_name = "Typical Enhancer"
+        verbose_name_plural = "Typical Enhancer"
+
+
+class VaraDB_Validated_Enhancer_ENDB(models.Model):
+    chromosome_region = models.ForeignKey(
+        "ChromosomeRegion",
+        on_delete=models.CASCADE,
+        related_name="varadb_validated_enhancer_endb",
+    )
+    enhancer_id = models.CharField(max_length=100)
+    target_gene = models.TextField(max_length=100)
+    disease = models.TextField()
+
+    class Meta:
+        verbose_name = "Validated Enhancer ENdb"
+        verbose_name_plural = "Validated Enhancer ENdb"
+
+
+class VaraDB_Validated_Enhancer_VISTA(models.Model):
+    chromosome_region = models.ForeignKey(
+        "ChromosomeRegion",
+        on_delete=models.CASCADE,
+        related_name="varadb_validated_enhancer_vista",
+    )
+    vista_id = models.CharField(max_length=100)
+    bracketing_gene = models.TextField(max_length=100)
+    expression_pattern = models.TextField()
+
+    class Meta:
+        verbose_name = "Validated Enhancer VISTA"
+        verbose_name_plural = "Validated Enhancer VISTA"
