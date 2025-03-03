@@ -38,8 +38,8 @@ def process_and_upload(file_name: str, file_type: str, sub_db_name: str):
     df["id"] = list(range(start_len + 1, start_len + len(df) + 1))
 
     # Generate output filenames
-    main_file = f"database/datasets/main_{file_name}.csv"
-    sub_file = f"database/datasets/sub_{file_name}.csv"
+    main_file = f"database/datasets/main_{os.path.basename(file_name)}"
+    sub_file = f"database/datasets/sub_{os.path.basename(file_name)}"
 
     # Save main file (subset of columns)
     df[["id", "Chr", "Start", "End", "Type"]].to_csv(
