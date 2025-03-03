@@ -70,10 +70,10 @@ def process_and_upload(file_name: str, file_type: str, sub_db_name: str):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Upload a file into SQLite DB")
-    parser.add_argument("file_name", type=str, help="File to be uploaded")
-    parser.add_argument("sub_db_name", type=str, help="Sub-table name in SQLite DB")
+    parser.add_argument("--file_name", type=str, help="File to be uploaded")
+    parser.add_argument("--sub_db_name", type=str, help="Sub-table name in SQLite DB")
     parser.add_argument(
-        "file_type", type=str, help="Provide the type for database entry"
+        "--file_type", type=str, help="Provide the type for database entry"
     )
 
     args = parser.parse_args()
