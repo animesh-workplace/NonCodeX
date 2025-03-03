@@ -1,23 +1,3 @@
-# import os
-
-# from query_engine.models import ChromosomeRegion
-
-
-# df = pandas.read_csv(file, sep="\t")
-# df["Type"] = "VaraDB_Disease_Enhancer"
-# start_len = ChromosomeRegion.objects.latest("id").id
-# df["id"] = list(range(start_len + 1, start_len + len(df) + 1))
-# df[["id", "Chr", "Start", "End", "Type"]].to_csv(
-#     f"main_{file}", sep=",", index=False, header=False
-# )
-# df.drop(columns=["Chr", "Start", "End", "Type"]).to_csv(
-#     f"sub_{file}", sep=",", index=True, header=False
-# )
-
-# # Run subprocess on the following command
-# # sqlite3 db.sqlite3 ".mode csv" ".import <sub_file> <sub_db>"
-# # sqlite3 db.sqlite3 ".mode csv" ".import <main_file> query_engine_chromosomeregion"
-
 import fireducks.pandas as pandas
 import subprocess, argparse, django, os
 
