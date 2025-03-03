@@ -12,6 +12,8 @@ class ChromosomeRegion(models.Model):
         ("VaraDB_Enhancer_PROSeq", "VaraDB_Enhancer_PROSeq"),
         ("VaraDB_Enhancer_FANTOM5", "VaraDB_Enhancer_FANTOM5"),
         ("VaraDB_Promoter_ChromHMM", "VaraDB_Promoter_ChromHMM"),
+        ("VaraDB_Disease_Enhancer", "VaraDB_Disease_Enhancer"),
+        ("VaraDB_EnDisease_Disease_Enhancer", "VaraDB_EnDisease_Disease_Enhancer"),
     ]
 
     chr = models.CharField(max_length=50, verbose_name="Chromosome")
@@ -170,3 +172,32 @@ class VaraDB_Enhancer_FANTOM5(models.Model):
     class Meta:
         verbose_name = "Active Enhancer FANTOM5"
         verbose_name_plural = "Active Enhancer FANTOM5"
+
+
+class VaraDB_Disease_Enhancer(models.Model):
+    chromosome_region = models.ForeignKey(
+        "ChromosomeRegion",
+        on_delete=models.CASCADE,
+        related_name="varadb_disease_enhancer",
+    )
+    target_gene = models.CharField(max_length=100)
+    disease_type = models.TextField(max_length=100)
+
+    class Meta:
+        verbose_name = "Disease Enhancer"
+        verbose_name_plural = "Disease Enhancer"
+
+
+class VaraDB_EnDisease_Disease_Enhancer(models.Model):
+    chromosome_region = models.ForeignKey(
+        "ChromosomeRegion",
+        on_delete=models.CASCADE,
+        related_name="varadb_endisease_disease_enhancer",
+    )
+    target_gene = models.CharField(max_length=100)
+    disease_type = models.TextField(max_length=100)
+    pubmed = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = "EnDisease Disease Enhancer"
+        verbose_name_plural = "EnDisease Disease Enhancer"
