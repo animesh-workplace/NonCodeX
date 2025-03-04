@@ -1,9 +1,11 @@
 import fireducks.pandas as pandas
 import subprocess, argparse, django, os
+from django.db import connection
 
 # Set up Django environment
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "noncodex_backend.settings")
 django.setup()
+connection.close()
 
 from query_engine.models import ChromosomeRegion
 
@@ -33,7 +35,7 @@ def process_and_upload(file_name: str, file_type: str, sub_db_name: str):
 
     # Run SQLite import commands
     db_name = "database/db.sqlite3"
-    subprocess.run(
+    result = subprocess.run(
         [
             "sqlite3",
             db_name,
@@ -43,8 +45,11 @@ def process_and_upload(file_name: str, file_type: str, sub_db_name: str):
             "PRAGMA temp_store = MEMORY;",
             ".mode csv",
             f".import {main_file} query_engine_chromosomeregion",
-        ]
+        ],
+        check=True,
+        stderr=subprocess.PIPE,
     )
+    print(result.stderr.decode())
     subprocess.run(
         [
             "sqlite3",
@@ -55,8 +60,11 @@ def process_and_upload(file_name: str, file_type: str, sub_db_name: str):
             "PRAGMA temp_store = MEMORY;",
             ".mode csv",
             f".import {sub_file} {sub_db_name}",
-        ]
+        ],
+        check=True,
+        stderr=subprocess.PIPE,
     )
+    print(result.stderr.decode())
 
     print("Data successfully uploaded!")
 
