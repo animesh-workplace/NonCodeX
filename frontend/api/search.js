@@ -3,10 +3,13 @@ export function useQuery() {
 	const BASEURL = `${config.public.API_BASE_URL}`
 
 	const uploadQuery = async (formData) => {
+		const csrfToken = useCookie('csrftoken')
+
 		try {
 			const { data, error } = await useFetch(`${BASEURL}/query/data/`, {
 				method: 'POST',
 				body: formData,
+				headers: { 'X-CSRFToken': csrfToken.value },
 			})
 
 			if (error.value) {
