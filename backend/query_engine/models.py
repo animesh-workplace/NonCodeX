@@ -4,8 +4,10 @@ from django.db import models
 # Create your models here.
 class ChromosomeRegion(models.Model):
     TYPE_CHOICES = [
+        ("VaraDB_ATAC_TCGA", "VaraDB_ATAC_TCGA"),
         ("VaraDB_TFChipSEQ", "VaraDB_TFChipSEQ"),
         ("VaraDB_Promoter_TSS", "VaraDB_Promoter_TSS"),
+        ("VaraDB_ATAC_CISTROME", "VaraDB_ATAC_CISTROME"),
         ("VaraDB_SuperEnhancer", "VaraDB_SuperEnhancer"),
         ("VaraDB_ChromatinState", "VaraDB_ChromatinState"),
         ("VaraDB_Enhancer_GROSeq", "VaraDB_Enhancer_GROSeq"),
@@ -17,6 +19,11 @@ class ChromosomeRegion(models.Model):
         ("VaraDB_Validated_Enhancer_ENDB", "VaraDB_Validated_Enhancer_ENDB"),
         ("VaraDB_Validated_Enhancer_VISTA", "VaraDB_Validated_Enhancer_VISTA"),
         ("VaraDB_EnDisease_Disease_Enhancer", "VaraDB_EnDisease_Disease_Enhancer"),
+        ("VaraDB_Enhancer_Target_Gene_FANTOM5", "VaraDB_Enhancer_Target_Gene_FANTOM5"),
+        (
+            "VaraDB_Enhancer_Target_Gene_ENCODEROADMap",
+            "VaraDB_Enhancer_Target_Gene_ENCODEROADMap",
+        ),
     ]
 
     chr = models.CharField(max_length=50, verbose_name="Chromosome")
@@ -234,7 +241,7 @@ class VaraDB_Validated_Enhancer_ENDB(models.Model):
         related_name="varadb_validated_enhancer_endb",
     )
     enhancer_id = models.CharField(max_length=100)
-    target_gene = models.TextField(max_length=100)
+    target_gene = models.TextField()
     disease = models.TextField()
 
     class Meta:
@@ -249,9 +256,73 @@ class VaraDB_Validated_Enhancer_VISTA(models.Model):
         related_name="varadb_validated_enhancer_vista",
     )
     vista_id = models.CharField(max_length=100)
-    bracketing_gene = models.TextField(max_length=100)
+    bracketing_gene = models.TextField()
     expression_pattern = models.TextField()
 
     class Meta:
         verbose_name = "Validated Enhancer VISTA"
         verbose_name_plural = "Validated Enhancer VISTA"
+
+
+class VaraDB_ATAC_CISTROME(models.Model):
+    chromosome_region = models.ForeignKey(
+        "ChromosomeRegion",
+        on_delete=models.CASCADE,
+        related_name="varadb_atac_cistrome",
+    )
+    gsm_id = models.CharField(max_length=100)
+    biosample_type = models.TextField()
+    biosample_name = models.TextField()
+
+    class Meta:
+        verbose_name = "ATAC Cistrome"
+        verbose_name_plural = "ATAC Cistrome"
+
+
+class VaraDB_ATAC_TCGA(models.Model):
+    chromosome_region = models.ForeignKey(
+        "ChromosomeRegion",
+        on_delete=models.CASCADE,
+        related_name="varadb_atac_tcga",
+    )
+    cancer = models.CharField(max_length=100)
+    score = models.FloatField()
+    annotation = models.CharField(max_length=100)
+    percent_gc = models.FloatField()
+    percent_at = models.FloatField()
+
+    class Meta:
+        verbose_name = "ATAC TCGA"
+        verbose_name_plural = "ATAC TCGA"
+
+
+class VaraDB_Enhancer_Target_Gene_ENCODEROADMap(models.Model):
+    chromosome_region = models.ForeignKey(
+        "ChromosomeRegion",
+        on_delete=models.CASCADE,
+        related_name="varadb_enhancer_target_gene_encoderoadmap",
+    )
+    gene = models.CharField(max_length=100)
+    score = models.FloatField()
+    sample_group = models.CharField(max_length=100)
+    epigenome_name = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = "Enhancer Target Gene ENCODE Road Map"
+        verbose_name_plural = "Enhancer Target Gene ENCODE Road Map"
+
+
+class VaraDB_Enhancer_Target_Gene_FANTOM5(models.Model):
+    chromosome_region = models.ForeignKey(
+        "ChromosomeRegion",
+        on_delete=models.CASCADE,
+        related_name="varadb_enhancer_target_gene_fantom5",
+    )
+    gene = models.CharField(max_length=100)
+    score = models.CharField(max_length=100)
+    sample_name = models.CharField(max_length=100)
+    description = models.TextField()
+
+    class Meta:
+        verbose_name = "Enhancer Target Gene FANTOM5"
+        verbose_name_plural = "Enhancer Target Gene FANTOM5"
