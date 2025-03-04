@@ -1,11 +1,9 @@
 import fireducks.pandas as pandas
 import subprocess, argparse, django, os
-from django.db import connection
 
 # Set up Django environment
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "noncodex_backend.settings")
 django.setup()
-connection.close()
 
 from query_engine.models import ChromosomeRegion
 
@@ -41,11 +39,11 @@ def process_and_upload(file_name: str, file_type: str, sub_db_name: str):
             db_name,
             "PRAGMA synchronous = OFF;",
             "PRAGMA journal_mode = MEMORY;",
-            "PRAGMA cache_size = 5242880;",
+            "PRAGMA cache_size = 1000000;",
             "PRAGMA temp_store = MEMORY;",
             ".mode csv",
             f".import {main_file} query_engine_chromosomeregion",
-        ],
+        ]
     )
     subprocess.run(
         [
@@ -53,11 +51,11 @@ def process_and_upload(file_name: str, file_type: str, sub_db_name: str):
             db_name,
             "PRAGMA synchronous = OFF;",
             "PRAGMA journal_mode = MEMORY;",
-            "PRAGMA cache_size = 5242880;",
+            "PRAGMA cache_size = 1000000;",
             "PRAGMA temp_store = MEMORY;",
             ".mode csv",
             f".import {sub_file} {sub_db_name}",
-        ],
+        ]
     )
 
     print("Data successfully uploaded!")
