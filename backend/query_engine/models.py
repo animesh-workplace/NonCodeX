@@ -6,6 +6,7 @@ class ChromosomeRegion(models.Model):
     TYPE_CHOICES = [
         ("VaraDB_ATAC_TCGA", "VaraDB_ATAC_TCGA"),
         ("VaraDB_TFChipSEQ", "VaraDB_TFChipSEQ"),
+        ("VaraDB_DHS_ENCODE", "VaraDB_DHS_ENCODE"),
         ("VaraDB_Promoter_TSS", "VaraDB_Promoter_TSS"),
         ("VaraDB_ATAC_CISTROME", "VaraDB_ATAC_CISTROME"),
         ("VaraDB_SuperEnhancer", "VaraDB_SuperEnhancer"),
