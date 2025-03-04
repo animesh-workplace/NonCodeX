@@ -35,7 +35,7 @@ def process_and_upload(file_name: str, file_type: str, sub_db_name: str):
 
     # Run SQLite import commands
     db_name = "database/db.sqlite3"
-    result = subprocess.run(
+    subprocess.run(
         [
             "sqlite3",
             db_name,
@@ -46,10 +46,7 @@ def process_and_upload(file_name: str, file_type: str, sub_db_name: str):
             ".mode csv",
             f".import {main_file} query_engine_chromosomeregion",
         ],
-        check=True,
-        stderr=subprocess.PIPE,
     )
-    print(result.stderr.decode())
     subprocess.run(
         [
             "sqlite3",
@@ -61,10 +58,7 @@ def process_and_upload(file_name: str, file_type: str, sub_db_name: str):
             ".mode csv",
             f".import {sub_file} {sub_db_name}",
         ],
-        check=True,
-        stderr=subprocess.PIPE,
     )
-    print(result.stderr.decode())
 
     print("Data successfully uploaded!")
 
