@@ -296,6 +296,22 @@ class VaraDB_ATAC_TCGA(models.Model):
         verbose_name_plural = "ATAC TCGA"
 
 
+class VaraDB_DHS_ENCODE(models.Model):
+    chromosome_region = models.ForeignKey(
+        "ChromosomeRegion",
+        on_delete=models.CASCADE,
+        related_name="varadb_dhs_encode",
+    )
+    signal_value = models.FloatField()
+    biosample_term_name = models.CharField(max_length=100)
+    biosample_type = models.TextField()
+    biosample_treatments = models.TextField()
+
+    class Meta:
+        verbose_name = "DHS ENCODE"
+        verbose_name_plural = "DHS ENCODE"
+
+
 class VaraDB_Enhancer_Target_Gene_ENCODEROADMap(models.Model):
     chromosome_region = models.ForeignKey(
         "ChromosomeRegion",
