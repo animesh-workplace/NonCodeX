@@ -13,7 +13,7 @@ tables = [row[0] for row in conn.execute(tables_query).fetchall()]
 # Export each table as a CSV file
 for table in tqdm(tables):
     df = pandas.read_sql_query(f"SELECT * FROM {table};", conn)
-    df.to_csv(f"{table}.csv", index=False)
+    df.to_csv(f"database/table_records/{table}.csv", index=False)
     print(f"Exported {table}.csv")
 
 # Close connection
