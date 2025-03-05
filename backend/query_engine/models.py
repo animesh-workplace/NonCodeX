@@ -343,3 +343,16 @@ class VaraDB_Enhancer_Target_Gene_FANTOM5(models.Model):
     class Meta:
         verbose_name = "Enhancer Target Gene FANTOM5"
         verbose_name_plural = "Enhancer Target Gene FANTOM5"
+
+
+class YUELab_TADs(models.Model):
+    chromosome_region = models.ForeignKey(
+        "ChromosomeRegion",
+        on_delete=models.CASCADE,
+        related_name="yuelab_tads",
+    )
+    tad_description = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = "YUE Lab Topologically associated Domain"
+        verbose_name_plural = "YUE Lab Topologically associated Domain"
