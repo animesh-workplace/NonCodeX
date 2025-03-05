@@ -37,8 +37,8 @@ def process_and_upload(file_name: str, file_type: str, sub_db_name: str):
         [
             "sqlite3",
             db_name,
-            "'PRAGMA journal_mode = MEMORY; PRAGMA cache_size = 1000000; PRAGMA temp_store = MEMORY;'",
-            "'.mode csv'",
+            "PRAGMA journal_mode = MEMORY; PRAGMA cache_size = 1000000; PRAGMA temp_store = MEMORY;",
+            ".mode csv",
             f".import {main_file} query_engine_chromosomeregion",
         ]
     )
@@ -46,7 +46,7 @@ def process_and_upload(file_name: str, file_type: str, sub_db_name: str):
         [
             "sqlite3",
             db_name,
-            "'PRAGMA journal_mode = MEMORY; PRAGMA cache_size = 1000000; PRAGMA temp_store = MEMORY;'",
+            "PRAGMA journal_mode = MEMORY; PRAGMA cache_size = 1000000; PRAGMA temp_store = MEMORY;",
             f".import {sub_file} {sub_db_name}",
         ]
     )
