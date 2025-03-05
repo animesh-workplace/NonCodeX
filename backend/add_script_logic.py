@@ -33,21 +33,22 @@ def process_and_upload(file_name: str, file_type: str, sub_db_name: str):
 
     # Run SQLite import commands
     db_name = "database/db.sqlite3"
+
     subprocess.run(
         [
             "sqlite3",
             db_name,
-            "PRAGMA journal_mode = MEMORY; PRAGMA cache_size = 1000000; PRAGMA temp_store = MEMORY;",
-            ".mode csv",
-            f".import {main_file} query_engine_chromosomeregion",
+            '"PRAGMA journal_mode = MEMORY; PRAGMA cache_size = 1000000; PRAGMA temp_store = MEMORY;"',
+            '".mode csv"',
+            f'".import {main_file} query_engine_chromosomeregion"',
         ]
     )
     subprocess.run(
         [
             "sqlite3",
             db_name,
-            "PRAGMA journal_mode = MEMORY; PRAGMA cache_size = 1000000; PRAGMA temp_store = MEMORY;",
-            f".import {sub_file} {sub_db_name}",
+            '"PRAGMA journal_mode = MEMORY; PRAGMA cache_size = 1000000; PRAGMA temp_store = MEMORY;"',
+            f'".import {sub_file} {sub_db_name}"',
         ]
     )
 
