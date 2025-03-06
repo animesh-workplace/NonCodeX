@@ -4,6 +4,7 @@ from django.db import models
 # Create your models here.
 class ChromosomeRegion(models.Model):
     TYPE_CHOICES = [
+        ("YUELab_TADs", "YUELab_TADs"),
         ("VaraDB_ATAC_TCGA", "VaraDB_ATAC_TCGA"),
         ("VaraDB_TFChipSEQ", "VaraDB_TFChipSEQ"),
         ("VaraDB_DHS_ENCODE", "VaraDB_DHS_ENCODE"),
